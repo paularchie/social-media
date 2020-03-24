@@ -1,0 +1,12 @@
+endpoint: http://prisma:4466
+datamodel: datamodel.prisma
+databaseType: document
+
+generate:
+  - generator: typescript-client
+    output: ./prisma/prisma-client/
+
+hooks:
+  post-deploy:
+   - prisma generate
+   - npx nexus-prisma-generate --client ./prisma/prisma-client --output ./prisma/nexus-prisma
