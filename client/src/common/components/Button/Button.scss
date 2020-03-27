@@ -1,0 +1,9 @@
+@import 'abstracts/variables';
+
+.button {
+    height: 3em;
+
+    & i {
+        margin-right: $margin-icon;
+    }
+}

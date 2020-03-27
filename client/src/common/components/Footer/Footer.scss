@@ -1,0 +1,20 @@
+@import 'abstracts/variables';
+
+footer {
+    color: #737373;
+    font-weight: 100;
+    font-size: 0.9em;
+    border-top: 1px solid $color-border;
+    padding: $margin-medium 0;
+    margin-top: $margin-medium;
+    text-align: center;
+
+    a {
+        color: #737373;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

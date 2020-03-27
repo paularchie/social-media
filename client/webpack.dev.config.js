@@ -1,4 +1,6 @@
 var path = require('path');
+const plugins = require('./webpack-utils/plugins');
+const loaders = require('./webpack-utils/loaders');
 const HWP = require('html-webpack-plugin');
 
 module.exports = {
@@ -7,26 +9,23 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: 'bundle.js',
+        publicPath: '/'
     },
     resolve: {
         extensions: [".ts", ".tsx", ".js"]
     },
     module: {
         rules: [
-            { test: /\.tsx?$/, loader: "ts-loader" },
-            {
-                test: /\.scss$/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    'sass-loader'
-                ]
-            }
+            loaders.typescript,
+            loaders.css,
+            loaders.scss
         ]
     },
     devServer: {
         host: '0.0.0.0',
-        disableHostCheck: true // workaround for webpack issue 
+        contentBase: './src',
+        historyApiFallback: true,
+        disableHostCheck: true
     },
     plugins: [
         new HWP(

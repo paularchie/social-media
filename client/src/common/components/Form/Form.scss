@@ -1,0 +1,34 @@
+.form-container {
+    // font-family: "Roboto";
+    width: 100%;
+
+    h1 {
+        color: rgba(59, 59, 59, 1);
+    }
+
+    form, button, input {
+        width: 100%;
+    }
+
+    // override this class to change the form width
+    .form-wrapper {
+        width: 450px;
+        margin-bottom: 2em;
+        padding: 3em;
+    }
+
+    .field-wrapper {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1.6em;
+
+        p {
+            color: red;
+            font-size: .8rem;
+        }
+    }
+
+    .inline-field-wrapper {
+        display: flex;
+    }
+}
