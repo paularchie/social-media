@@ -1,5 +1,5 @@
 import React from 'react';
-import './Login.scss';
+import { withRouter } from 'react-router-dom';
 import Form from '../../common/components/Form/Form';
 import Card from '../../common/components/Card/Card';
 import { FormControlPropsArray } from '../../common/components/Form/models/Form.model';
@@ -7,11 +7,27 @@ import { FormControlTypes } from '../../common/components/Form/enums/FormControl
 import { required } from '../../common/components/Form/util/validators';
 import Icon, { IconTypes } from '../../common/components/Icon/Icon';
 import Footer from '../../common/components/Footer/Footer';
+import './Signin.scss';
+import useUserApi from '../../common/hooks/UserApi.hook';
+import { setCurrentUser } from '../../redux/user/user.actions';
+import { useDispatch } from 'react-redux';
 
-const Login = () => {
+const Signin = (): JSX.Element => {
 
-    const handleSubmit = async (formData: FormData) => {
+    const dispatch = useDispatch();
+    const userApi = useUserApi();
+
+    const handleSubmit = async (formData/*: FormData*/) => {
         event.preventDefault();
+        try {
+            const user = await userApi.login(formData);
+            if (user) {
+                dispatch(setCurrentUser(user));
+            }
+            // return setCredentialErrors();
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     const handleInputChange = (): void => {
@@ -41,12 +57,13 @@ const Login = () => {
             },
             validators: [required],
             changeHandler: handleInputChange,
-        },
+        }
     ];
 
     return (
         <div className="form-container login-form center-content">
             <div className="center-content column">
+
                 <Card className="form-wrapper login-form-wrapper card-2 center-content column">
                     <div className='center-content column'>
                         <div className='icon-wrapper center-content'>
@@ -57,18 +74,20 @@ const Login = () => {
                         </div>
                         <h1 className='login-form-heading'>Sign In</h1>
                     </div>
+
                     <Form
                         controlProps={controlProps}
                         submitHandler={handleSubmit}
                     />
                 </Card>
+
                 <Footer />
             </div>
         </div>
     )
 }
 
-export default Login//withRouter(Login);
+export default Signin;
 
 
 
