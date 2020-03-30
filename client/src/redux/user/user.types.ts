@@ -1,3 +1,4 @@
 export enum UserActionTypes {
-    SetCurrentUser = 'Set Current User'
+    SetCurrentUser = 'Set Current User',
+    RemoveCurrentUser = 'Remove Current User'
 }

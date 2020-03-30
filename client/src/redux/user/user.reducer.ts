@@ -10,7 +10,8 @@ const userReducer = (state = InitialState, action) => {
     const { type, payload } = action;
 
     const actionHandlers = {
-        [UserActionTypes.SetCurrentUser]: setUser
+        [UserActionTypes.SetCurrentUser]: setUser,
+        [UserActionTypes.RemoveCurrentUser]: removeUser
     };
 
     const handler = actionHandlers[type];
@@ -22,6 +23,13 @@ const userReducer = (state = InitialState, action) => {
         return {
             ...state,
             currentUser: payload
+        }
+    }
+
+    function removeUser() {
+        return {
+            ...state,
+            currentUser: null
         }
     }
 }
