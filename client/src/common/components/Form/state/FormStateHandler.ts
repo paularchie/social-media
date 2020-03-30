@@ -35,7 +35,6 @@ const useFormStateHandler = (returnValueOnly) => {
 
     // this is triggered when errors are passed through input
     const updateErrors = (errors): void => {
-        // console.log('errors', errors)
         errors && dispatch({ type: FormActionTypes.UpdateFieldErrors, payload: errors });
     }
 

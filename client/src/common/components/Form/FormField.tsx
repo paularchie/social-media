@@ -17,7 +17,7 @@ const FormField = ({ controlProps, blurHandler, changeHandler, error, inputProps
         onKeyDown: (event) => {
             // prevent submit on enter press
             if (event.key === 'Enter') {
-                event.preventDefault();
+                // event.preventDefault();
             }
         },
         error,

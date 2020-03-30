@@ -1,4 +1,5 @@
 import { FormControlTypes } from "../enums/FormControlTypes.enum";
+import { FormErrorTypes } from "../enums/FormErrorTypes.enum";
 
 export type ValidatorFn = (value: string) => any;
 export type AsyncValidatorFn = (value: string) => Promise<any>;
@@ -16,7 +17,7 @@ export type FormControlProps = {
     asyncValidators?: AsyncValidatorFn[],
     attributes?: {}
     value?: string,
-    flex?:number
+    flex?: number
 };
 
 export type ValidationErrors = { [key: string]: any }
@@ -34,4 +35,10 @@ export type FormData = {
         touched: boolean,
         errors: { [key: string]: {} | null }
     };
+}
+
+export type FormErrorValue = boolean | Array<string>;
+
+export type FormErrors = {
+    [key in FormErrorTypes]: FormErrorValue
 }

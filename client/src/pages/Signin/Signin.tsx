@@ -1,5 +1,4 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { useState } from 'react';
 import Form from '../../common/components/Form/Form';
 import Card from '../../common/components/Card/Card';
 import { FormControlPropsArray } from '../../common/components/Form/models/Form.model';
@@ -11,26 +10,43 @@ import './Signin.scss';
 import useUserApi from '../../common/hooks/UserApi.hook';
 import { setCurrentUser } from '../../redux/user/user.actions';
 import { useDispatch } from 'react-redux';
+import { FormErrorTypes } from '../../common/components/Form/enums/FormErrorTypes.enum';
 
 const Signin = (): JSX.Element => {
 
+    const [formErrors, setFormErrors] = useState(null);
     const dispatch = useDispatch();
     const userApi = useUserApi();
+
 
     const handleSubmit = async (formData/*: FormData*/) => {
         event.preventDefault();
         try {
             const user = await userApi.login(formData);
-            if (user) {
-                dispatch(setCurrentUser(user));
-            }
-            // return setCredentialErrors();
+            user
+                ? dispatch(setCurrentUser(user))
+                : setCredentialErrors();
         } catch (error) {
             console.log(error);
         }
     }
 
-    const handleInputChange = (): void => {
+    const setCredentialErrors = (): void => {
+        const errors = {
+            email: { [FormErrorTypes.Default]: true },
+            password: { [FormErrorTypes.IncorrectCredentials]: true }
+        };
+        setFormErrors(errors);
+    }
+
+    function handleInputChange() {
+        // clear errors
+        const errors = {
+            email: { [FormErrorTypes.Default]: null },
+            password: { [FormErrorTypes.IncorrectCredentials]: null }
+        };
+
+        setFormErrors(errors);
     }
 
     const controlProps: FormControlPropsArray = [
@@ -78,6 +94,7 @@ const Signin = (): JSX.Element => {
                     <Form
                         controlProps={controlProps}
                         submitHandler={handleSubmit}
+                        validationErrors={formErrors}
                     />
                 </Card>
 

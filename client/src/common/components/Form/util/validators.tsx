@@ -3,16 +3,16 @@ import { FormErrorTypes } from "../enums/FormErrorTypes.enum";
 import { validatePassword } from "./validatePassword";
 
 export const required = (value: string): { [key: string]: boolean } => {
-    return value && value.trim() ? { [FormErrorTypes.required]: null } : { [FormErrorTypes.required]: true };
+    return value && value.trim() ? { [FormErrorTypes.Required]: null } : { [FormErrorTypes.Required]: true };
 }
 
 export const email = (value: string): { [key: string]: boolean } | null => {
-    return !(new RegExp(EMAIL_REGEX).test(value)) ? { [FormErrorTypes.email]: true } : { [FormErrorTypes.email]: null }
+    return !(new RegExp(EMAIL_REGEX).test(value)) ? { [FormErrorTypes.Email]: true } : { [FormErrorTypes.Email]: null }
 };
 
 export const passwordSecurity = (value: string): { [key: string]: string[] } | null => {
     const errors: any = value && value.trim ? validatePassword(value) : [];
-    return errors.length ? { [FormErrorTypes.passwordSecurity]: errors } : { [FormErrorTypes.passwordSecurity]: null };
+    return errors.length ? { [FormErrorTypes.PasswordSecurity]: errors } : { [FormErrorTypes.PasswordSecurity]: null };
 }
 
 const comparePasswordsAndGetError = () => {

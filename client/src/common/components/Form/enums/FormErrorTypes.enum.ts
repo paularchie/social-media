@@ -1,9 +1,10 @@
 export enum FormErrorTypes {
-    required = 'required',
-    email = 'invalidEmail',
-    incorrectCredentials = 'incorrectCredentials',
-    passwordSecurity = 'passwordSecurity',
-    passwordMatch = 'passwordMatch',
-    emailExists = 'emailExists',
-    usernameExists = 'usernameExists',
+    Required = 'required',
+    Email = 'invalidEmail',
+    IncorrectCredentials = 'incorrectCredentials',
+    PasswordSecurity = 'passwordSecurity',
+    PasswordMatch = 'passwordMatch',
+    EmailExists = 'emailExists',
+    UsernameExists = 'usernameExists',
+    Default = 'default'
 };
