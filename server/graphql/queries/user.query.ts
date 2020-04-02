@@ -50,9 +50,8 @@ export const Query = prismaObjectType({
                 value: stringArg()
             },
             nullable: true,
-            resolve: authenticated(async (_, { field, value }, ctx) =>
+            resolve: async (_, { field, value }, ctx) =>
                 !!(await ctx.prisma.user({ [field]: value }))
-            )
 
         })
         t.field('logout', {

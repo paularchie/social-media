@@ -8,6 +8,7 @@ import { setCurrentUser, removeCurrentUser } from './redux/user/user.actions';
 import useUserSelectors from './redux/user/user.selectors';
 import AppContainer from './common/components/AppContainer/AppContainer';
 import { NavigationItemProps } from './common/components/NavigationItems/NavigationItemsProps.type';
+import Signup from './pages/Signup/Signup';
 
 const App = ({ history, location }): JSX.Element => {
 
@@ -88,8 +89,11 @@ const App = ({ history, location }): JSX.Element => {
                             <Route path='*' component={() => <div>404</div>} />
                         </Switch>
                         : <>
-                            <Route path='/signin' component={Signin} />
-                            <Route path='*' render={() => <Redirect to='/signin' />} />
+                            <Switch>
+                                <Route path='/signin' component={Signin} />
+                                <Route path='/signup' component={Signup} />
+                                <Route path='*' render={() => <Redirect to='/signin' />} />
+                            </Switch>
                         </>
                     }
                 </AppContainer>

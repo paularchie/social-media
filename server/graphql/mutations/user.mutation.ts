@@ -20,7 +20,7 @@ export const Mutation = prismaObjectType({
                 password: stringArg(),
                 roles: stringArg({ list: true })
             },
-            resolve: authenticated(async (_, args, ctx) => {
+            resolve: async (_, args, ctx) => {
                 const user = ctx.prisma.createUser({
                     ...args,
                     password: await hashPassword(args.password),
@@ -28,7 +28,7 @@ export const Mutation = prismaObjectType({
 
                 });
                 return user;
-            })
+            }
         });
     }
 });

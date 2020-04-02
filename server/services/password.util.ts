@@ -5,6 +5,5 @@ export async function hashPassword(password): Promise<String> {
 }
 
 export async function comparePasswords(hash, plainPassword): Promise<Boolean> {
-        return Promise.resolve(true)
-        // return await argon2.verify(hash, plainPassword);
+        return await argon2.verify(hash, plainPassword);
 }
